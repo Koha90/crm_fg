@@ -126,5 +126,5 @@ STATIC_URL = '/static/'
 
 # Строки перенаправления пользователя
 LOGIN_REDIRECT_URL = 'account:dashboard'
-LOGIN_URL = 'account:login'
-LOGOUT_URL = 'account:logout'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'

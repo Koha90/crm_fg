@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls', namespace='account')),
     path('crm/', include('crm.urls', namespace='crm')),
+    # Работа с пользователем.
+    path('account/', include('django.contrib.auth.urls')),
 ]

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/blog.css" %}" rel="stylesheet">
+</head>
+
+<body>
+    <span class="logo">CRM Fresh Group</span>
+        
+        {% if request.user.is_authenticated %}
+            <ul class="menu">
+                <li {% if section == 'dashboard' %} class="selected" {% endif %}>
+                    <a href="{% url 'account:dashboard' %}">Рабочий стол</a>
+                </li>
+                <li {% if section == 'dashboard' %} class="selected" {% endif %}>
+                    <a href="{% url 'crm:client_list' %}">CRM</a>
+                </li>
+            </ul>
+        {% endif %}
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="sidebar">
+        <h2>CRM</h2>
+        <p>Просто наша CRM.</p>
+    </div>
+</body>
+
+</html>

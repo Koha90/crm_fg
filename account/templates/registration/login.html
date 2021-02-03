@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход в CRM Fresh Group{% endblock title %}
+
+{% block content %}
+    <h1>Вход в CRM</h1>
+    
+    {% if form.errors %}
+        <p>Неверный логин или пароль. Попробуйте ещё раз</p>
+    {% else %}
+        <p>Введите логин и пароль:</p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'account:login' %}" method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+        
+{% endblock content %}
+    

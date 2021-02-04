@@ -7,4 +7,8 @@ app_name = 'account'
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
+    path('profile/', views.profile_list, name='profile_list'),
+    path('profile/<int:id>/<slug:profile>/',
+         views.profile_detail,
+         name='profile_detail'),
 ]

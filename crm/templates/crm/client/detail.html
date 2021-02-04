@@ -8,4 +8,7 @@
 <a href="tel:{{ client.phone|linebreaks }}">{{ client.phone|linebreaks }}</a>
 <a href="mailto:{{ client.email|linebreaks }}">{{ client.email|linebreaks }}</a>
 <p>{{ client.next_call|linebreaks }}</p>
+
+<a href="{{ client.get_absolute_url }}edit/">изменит</a>
+
 {% endblock %}

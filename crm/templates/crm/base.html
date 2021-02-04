@@ -12,11 +12,14 @@
         
         {% if request.user.is_authenticated %}
             <ul class="menu">
-                <li {% if section == 'dashboard' %} class="selected" {% endif %}>
+                <li>
                     <a href="{% url 'account:dashboard' %}">Рабочий стол</a>
                 </li>
-                <li {% if section == 'dashboard' %} class="selected" {% endif %}>
+                <li>
                     <a href="{% url 'crm:client_list' %}">CRM</a>
+                </li>
+                <li>
+                    <a href="{% url 'crm:client_new' %}">Новый клиент</a>
                 </li>
             </ul>
         {% endif %}

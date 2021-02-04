@@ -1,7 +1,22 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.utils.text import slugify
+
+
+from django.template.defaultfilters import slugify as django_slugify
+
+
+alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
+            'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+            'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ы': 'i', 'э': 'e', 'ю': 'yu',
+            'я': 'ya'}
+
+
+def slugify(s):
+    """
+    Overriding django slugify that allows to use russian words as well.
+    """
+    return django_slugify(''.join(alphabet.get(w, w) for w in s.lower()))
 
 
 class Client(models.Model):
@@ -24,7 +39,7 @@ class Client(models.Model):
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
-        ordering = ('title',)
+        ordering = ('-created',)
 
     def __str__(self):
         return self.title
@@ -33,7 +48,6 @@ class Client(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Client, self).save(*args, **kwargs)
-
 
     def get_absolute_url(self):
         return reverse('crm:client_detail',

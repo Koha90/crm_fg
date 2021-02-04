@@ -4,7 +4,7 @@ from django.utils.text import slugify
 from .models import Client
 
 
-class ClientEditForm(forms.ModelForm):
+class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ('title', 'city', 'address', 'decision_maker', 'phone',

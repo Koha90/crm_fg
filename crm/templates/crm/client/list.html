@@ -8,5 +8,7 @@
 </h2>
 <p class="date">Занесён {{ client.created }} by {{ client.responsible }}</p>
 {{ client.description|truncatewords:30|linebreaks }}
+{{ client.first_call|truncatewords:30|linebreaks }}
+{{ client.next_call|truncatewords:30|linebreaks }}
 {% endfor %}
 {% endblock %}

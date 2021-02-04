@@ -1,12 +1,13 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class Profile(models.Model):
     """ Этот класс связывается с пользователем сайта и расширяет его профиль
     который будет отображаться на странице. У каждого профиля своя страница. """
-    user = models.ForeignKey(User,
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     position = models.CharField('Должность', max_length=30)
     about = models.TextField('О себе', blank=True, null=True)

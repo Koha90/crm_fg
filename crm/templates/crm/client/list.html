@@ -1,14 +1,24 @@
 {% extends "crm/base.html" %}
 {% block title %}CRM :: Fresh Group{% endblock %}
 {% block content %}
-<h1>CRM</h1>
+<div class="container">
+    <h1 class="crm_h1">Карточки наших клиентов</h1>
+</div>
+
+
 {% for client in clients %}
-<h2>
-    <a href="{{ client.get_absolute_url }}">{{ client.title }}</a>
-</h2>
-<p class="date">Занесён {{ client.created }} by {{ client.responsible }}</p>
-{{ client.description|truncatewords:30|linebreaks }}
-{{ client.first_call|truncatewords:30|linebreaks }}
-{{ client.next_call|truncatewords:30|linebreaks }}
+<div class="crm_client">
+    <div class="crm_client-card">
+        <h2 class="crm_h2">
+            <a href="{{ client.get_absolute_url }}">{{ client.title }}</a>
+        </h2>
+        <p>{{ client.description|truncatewords:30|linebreaks }}</p>
+        <p>{{ client.first_call|truncatewords:30|linebreaks }}</p>
+        <p>{{ client.next_call|truncatewords:30|linebreaks }}</p>
+        <p class="date">Занесён {{ client.created }} by {{ client.responsible }}</p>
+        <p class="date">Изменён {{ client.updated }}</p>
+        <button type="submit"><a href="{{ client.get_absolute_url }}edit/">редактировать</a></button>
+    </div>
+</div>
 {% endfor %}
 {% endblock %}

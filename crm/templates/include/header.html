@@ -1,0 +1,33 @@
+{% load static %}
+<header class="header">
+    {% if request.user.is_authenticated %}
+    <div class="container">
+
+        <div class="menu">
+            <div>
+                <a href="{% url 'account:dashboard' %}"><img src="{% static "images/logo.png" %}" alt="" class="logo"></a>
+            </div>
+            <div>
+                <a href="{% url 'account:dashboard' %}">Рабочий стол</a>
+            </div>
+            <div>
+                <a href="{% url 'crm:client_list' %}">CRM</a>
+            </div>
+            <div>
+                <a href="{% url 'crm:client_new' %}">Новый клиент</a>
+            </div>
+
+            {% if request.user.is_authenticated %}
+            <div>
+                <a href="{{ request.user.profile.get_absolute_url }}">{{ request.user.profile.user.first_name }} {{ request.user.profile.user.last_name }}</a>
+            </div>
+            <div><a href="{% url 'logout' %}">Выйти</a></div>
+            <div><a href="{{ request.user.profile.get_absolute_url }}"><img src="{{ request.user.profile.photo.url }}" alt="" class="avatar"></a></div>
+            {% else %}
+            <div><a href="{% url 'login' %}">Войти</a></div>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endif %}
+</header>

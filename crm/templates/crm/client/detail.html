@@ -1,14 +1,19 @@
 {% extends "crm/base.html" %}
 {% block title %}CRM :: Fresh Group{% endblock %}
 {% block content %}
-<h1>{{ client.title }}</h1>
+<h1 class="crm_h1">{{ client.title }}</h1>
 <p class="date">Создан {{ client.created }} {{ client.responsible.first_name }} {{ client.responsible.last_name }}</p>
-<p>{{ client.first_call|linebreaks }}</p>
-<p>{{ client.decision_maker|linebreaks }}</p>
-<a href="tel:{{ client.phone|linebreaks }}">{{ client.phone|linebreaks }}</a>
-<a href="mailto:{{ client.email|linebreaks }}">{{ client.email|linebreaks }}</a>
-<p>{{ client.next_call|linebreaks }}</p>
+<div>
+<p><h2 class="crm_h1 crm_h1-body-client">Первый звонок</h2><br>{{ client.first_call|linebreaks }}</p><hr>
+<p><h2 class="crm_h1 crm_h1-body-client">Следующий звонок</h2><br>{{ client.next_call|linebreaks }}</p><hr>
+<p><h2 class="crm_h1 crm_h1-body-client">Описание клиента</h2><br>{{ client.description|linebreaks }}</p><hr>
+</div>
+<p><h2 class="crm_h1 crm_h1-body-client">ЛПР</h2><br>{{ client.decision_maker|linebreaks }}</p><hr>
+<p><h2 class="crm_h1 crm_h1-body-client">Контакты</h2></p>
+<p><a href="tel:{{ client.phone|linebreaks }}">{{ client.phone|linebreaks }}</a></p>
+<p><a href="mailto:{{ client.email|linebreaks }}">{{ client.email|linebreaks }}</a></p><hr>
 
-<a href="{{ client.get_absolute_url }}edit/">изменит</a>
+
+<p><a href="{{ client.get_absolute_url }}edit/">редактировать</a></p>
 
 {% endblock %}

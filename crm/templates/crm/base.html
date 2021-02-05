@@ -4,32 +4,24 @@
 
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <link href="{% static "css/blog.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/reset.css" %}">
+    <link rel="stylesheet" type="text/css" href={% static "css/iconfonts.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "fonts/ubuntu/*" %}>
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
 </head>
 
 <body>
-    <span class="logo">CRM Fresh Group</span>
-        
-        {% if request.user.is_authenticated %}
-            <ul class="menu">
-                <li>
-                    <a href="{% url 'account:dashboard' %}">Рабочий стол</a>
-                </li>
-                <li>
-                    <a href="{% url 'crm:client_list' %}">CRM</a>
-                </li>
-                <li>
-                    <a href="{% url 'crm:client_new' %}">Новый клиент</a>
-                </li>
-            </ul>
-        {% endif %}
-    <div id="content">
-        {% block content %}{% endblock %}
+    <!-- Подключаем хэдер -->
+    {% include 'include/header.html' %}
+    
+    <div class="container">
+
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+
     </div>
-    <div id="sidebar">
-        <h2>CRM</h2>
-        <p>Просто наша CRM.</p>
-    </div>
+
 </body>
 
 </html>

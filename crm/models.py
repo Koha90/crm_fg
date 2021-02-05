@@ -25,13 +25,13 @@ class Client(models.Model):
     city = models.CharField('Город', max_length=20)
     address = models.CharField('Адрес', max_length=255, blank=True)
     decision_maker = models.CharField('ЛПР', max_length=255, blank=True)
-    phone = models.PositiveIntegerField('Телефон')
+    phone = models.CharField('Телефон', max_length=12)
     email = models.EmailField('Электронная почта', blank=True)
     first_call = models.TextField('Первый звонок', blank=True)
     description = models.TextField('Описание/Комментарий', blank=True)
     next_call = models.TextField('Следующий звонок', blank=True)
     slug = models.SlugField('Ссылка на клиента', max_length=150, unique=True)
-    created = models.DateField('Создан', auto_now_add=True)
+    created = models.DateTimeField('Создан', auto_now_add=True)
     updated = models.DateTimeField('Обновлён', auto_now=True)
     responsible = models.ForeignKey(User, on_delete=models.CASCADE,
                                     verbose_name='Ответственный', blank=True)
@@ -39,7 +39,7 @@ class Client(models.Model):
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
-        ordering = ('-created',)
+        ordering = ['-created', '-updated']
 
     def __str__(self):
         return self.title

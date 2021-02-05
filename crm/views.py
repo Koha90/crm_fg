@@ -22,7 +22,7 @@ def client_detail(request, client, id):
 def client_new(request):
     form = ClientForm()
     if request.method == "POST":
-        form = ClientForm(request.POST)
+        client_form = ClientForm(request.POST)
         if form.is_valid():
             client = form.save(commit=False)
             client.responsible = request.user
@@ -30,7 +30,7 @@ def client_new(request):
             return redirect('crm:client_list')
     else:
         form = ClientForm()
-    return render(request, 'crm/client/edit.html', {'form': form})
+    return render(request, 'crm/client/edit.html', {'client_form': client_form})
 
 
 @login_required

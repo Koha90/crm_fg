@@ -29,7 +29,7 @@ def client_new(request):
             client.save()
             return redirect('crm:client_list')
     else:
-        form = ClientForm()
+        client_form = ClientForm()
     return render(request, 'crm/client/edit.html', {'client_form': client_form})
 
 

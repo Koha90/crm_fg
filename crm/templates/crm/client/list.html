@@ -4,17 +4,31 @@
 <div class="container">
     <h1 class="crm_h1">Карточки наших клиентов</h1>
 </div>
-
-
+<div class="categories">
+    <h3>Категории клиентов</h3>
+    <ul>
+        <li {% if not category %} class="selected" {% endif %}>
+            <a href="{% url 'crm:client_list' %}">Все</a>
+        </li>
+        {% for c in categories %}
+        <li {% if category.slug == c.slug %}class="selected" {% endif %}>
+            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <h1>{% if category %}{{ category.name }}{% else %}Клиенты{% endif %}</h1>
+</div>
 {% for client in clients %}
 <div class="crm_client">
     <div class="crm_client-card">
         <h2 class="crm_h2">
             <a href="{{ client.get_absolute_url }}">{{ client.title }}</a>
         </h2>
-        <p>{{ client.description|truncatewords:30|linebreaks }}</p>
-        <p>{{ client.first_call|truncatewords:30|linebreaks }}</p>
-        <p>{{ client.next_call|truncatewords:30|linebreaks }}</p>
+        <p>{{ client.description|truncatechars:30|linebreaks }}</p>
+        <p>{{ client.first_call|truncatechars:30|linebreaks }}</p>
+        <p>{{ client.next_call|truncatechars:30|linebreaks }}</p>
         <p class="date">Занесён {{ client.created }} by {{ client.responsible }}</p>
         <p class="date">Изменён {{ client.updated }}</p>
         <button type="submit"><a href="{{ client.get_absolute_url }}edit/">редактировать</a></button>

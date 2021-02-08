@@ -24,7 +24,7 @@ def profile_detail(request, profile, id):
 
 
 @login_required
-def edit_profile(request):
+def edit_profile(request, id, profile):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile,
@@ -39,3 +39,4 @@ def edit_profile(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
     return render(request, 'account/profile/edit.html',
                   {'user_form': user_form, 'profile_form': profile_form})
+

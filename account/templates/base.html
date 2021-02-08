@@ -1,42 +1,50 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
     <title>{% block title %}{% endblock title %}</title>
 </head>
+
 <body>
     <!-- Заголовок страницы -->
-    <div id="header">
-        <span class="logo">CRM Fresh Group</span>
-        
+    {% include 'include/header.html' %}
+    <div class="container">
+
+        {% comment %}
         {% if request.user.is_authenticated %}
-            <ul class="menu">
-                <li {% if section == 'dashboard' %} class="selected" {% endif %}>
-                    <a href="{% url 'account:dashboard' %}">Рабочий стол</a>
-                </li>
-                <li {% if section == 'dashboard' %} class="selected" {% endif %}>
-                    <a href="{% url 'crm:client_list' %}">CRM</a>
-                </li>
-            </ul>
+        <ul class="menu">
+            <li {% if section=='dashboard' %} class="selected" {% endif %}>
+                <a href="{% url 'account:dashboard' %}">Рабочий стол</a>
+            </li>
+            <li {% if section=='dashboard' %} class="selected" {% endif %}>
+                <a href="{% url 'crm:client_list' %}">CRM</a>
+            </li>
+        </ul>
         {% endif %}
+        {% endcomment %}
+
+
 
         <span class="user">
-            
+
             {% if request.user.is_authenticated %}
-                Привет, {{ request.user.first_name }}!
-                <a href="{% url 'logout' %}">Выйти</a>
+            Привет, {{ request.user.first_name }}!
+            <a href="{% url 'logout' %}">Выйти</a>
             {% else %}
-                <a href="{% url 'login' %}">Войти</a>
+            <a href="{% url 'login' %}">Войти</a>
             {% endif %}
-                
+
         </span>
-            
-    </div>
+
+    
     <!-- Контент страницы -->
-    <div id="content">
+    
         {% block content %}{% endblock content %}
     </div>
 </body>
+
 </html>

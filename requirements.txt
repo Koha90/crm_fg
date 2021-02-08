@@ -18,3 +18,5 @@ six @ file:///tmp/build/80754af9/six_1605205327372/work
 sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
 toml==0.10.2
 wrapt==1.12.1
+
+django~=3.1.6

@@ -10,21 +10,24 @@
     
     <form method="POST" enctype="multipart/form-data">
         <h1 class="crm_h1">Создание/редактирование клиента</h1>
+        <p>Категория: {{ client_form.category }}</p>
         <p>Название: {{ client_form.title }}</p>
         <p>Город: {{ client_form.city }}</p>
         <p>Адрес: {{ client_form.address }}</p>
         <p>ЛПР: {{ client_form.decision_maker }}</p>
         <p>Телефон: {{ client_form.phone }}</p>
         <p>Электронная почта: {{ client_form.email }}</p>
-        
-        {% if client_new %}
+
+        {% if section == 'client_new' %}
         <p>Первый звонок: {{ client_form.first_call }}</p>
+        {% else %}
+            
         {% endif %}
             
         <p>Следующий звонок: {{ client_form.next_call }}</p>
         <p>Описание компании: {{ client_form.description }}</p>
         {% csrf_token %}
-        <button type="submit">Сохранить изменения</button>
+        <input type="submit">Сохранить изменения</input>
     </form>
 
 {% endblock content %}

@@ -132,3 +132,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_REDIRECT_URL = 'account:dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+
+# Статические файлы
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')

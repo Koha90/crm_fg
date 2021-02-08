@@ -11,6 +11,9 @@
                 <a href="{% url 'account:dashboard' %}">Рабочий стол</a>
             </div>
             <div>
+                <a href="{% url 'account:profile_list' %}">Наша команда</a>
+            </div>
+            <div>
                 <a href="{% url 'crm:client_list' %}">CRM</a>
             </div>
             <div>
@@ -22,7 +25,7 @@
                 <a href="{{ request.user.profile.get_absolute_url }}">{{ request.user.profile.user.first_name }} {{ request.user.profile.user.last_name }}</a>
             </div>
             <div><a href="{% url 'logout' %}">Выйти</a></div>
-            <div><a href="{{ request.user.profile.get_absolute_url }}"><img src="{{ request.user.profile.photo.url }}" alt="" class="avatar"></a></div>
+            <div><a href="{{ request.user.profile.get_absolute_url }}"><img src="{% if request.user.profile.photo %}{{ request.user.profile.photo.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="" class="avatar"></a></div>
             {% else %}
             <div><a href="{% url 'login' %}">Войти</a></div>
             {% endif %}

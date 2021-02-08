@@ -5,6 +5,7 @@
 <p class="date">Создан {{ client.created }} {{ client.responsible.first_name }} {{ client.responsible.last_name }}</p>
 <div>
 <p><h2 class="crm_h1 crm_h1-body-client">Первый звонок</h2><br>{{ client.first_call|linebreaks }}</p><hr>
+<p><h2 class="crm_h1 crm_h1-body-client">Категория</h2><br>{{ client.category|linebreaks }}</p><hr>
 <p><h2 class="crm_h1 crm_h1-body-client">Следующий звонок</h2><br>{{ client.next_call|linebreaks }}</p><hr>
 <p><h2 class="crm_h1 crm_h1-body-client">Описание клиента</h2><br>{{ client.description|linebreaks }}</p><hr>
 </div>
@@ -13,6 +14,34 @@
 <p><a href="tel:{{ client.phone|linebreaks }}">{{ client.phone|linebreaks }}</a></p>
 <p><a href="mailto:{{ client.email|linebreaks }}">{{ client.email|linebreaks }}</a></p><hr>
 
+{% for comment in comments %}
+    <p><h2 class="crm_h1 crm_h1-body-client">{{ forloop.counter }} {{ comment.author.first_name }} {{ comment.author.last_name }}</h2>({{ comment.author}})</p>
+    <p> {{ comment.body|linebreaks }}</p>
+    <p>{{ comment.created }} {{ comment.updated }}</p>
+        
+{% empty %}
+    <p>Нет комментариев</p>
+{% endfor %}
+
+
+{% if new_comment %}
+    <h2 class="crm_h1 crm_h1-body-client">Комментарий добавлен</h2>
+    <h2 class="crm_h1 crm_h1-body-client">добавить ещё</h2>
+    <form method="POST">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Добавить комментарий</button>
+    </form>
+{% else %}
+    <h2 class="crm_h1 crm_h1-body-client">Новый комментарий</h2>
+    <form method="POST">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Добавить комментарий</button>
+    </form>
+{% endif %}
+    
+    
 
 <p><a href="{{ client.get_absolute_url }}edit/">редактировать</a></p>
 

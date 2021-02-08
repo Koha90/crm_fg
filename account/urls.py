@@ -11,5 +11,5 @@ urlpatterns = [
     path('profile/<int:id>/<slug:profile>/',
          views.profile_detail,
          name='profile_detail'),
-    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/<int:id>/<slug:profile>/edit/', views.edit_profile, name='edit_profile'),
 ]
